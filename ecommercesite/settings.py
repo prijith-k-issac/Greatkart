@@ -43,13 +43,14 @@ INSTALLED_APPS = [
     'accounts',
     'store',
     'carts',
+
 ]
 
 MIDDLEWARE = [
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -134,3 +135,18 @@ STATICFILES_DIRS = [
 
 MEDIA_URL ='/media/'
 MEDIA_ROOT = BASE_DIR/'media'
+
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+}
+
+#smtp activation
+
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER ='koshipariyathu@gmail.com'
+EMAIL_HOST_PASSWORD ='Koshi@1996'
+EMAIL_USE_TLS =True
