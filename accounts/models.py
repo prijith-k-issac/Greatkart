@@ -1,3 +1,6 @@
+from asyncio.windows_events import NULL
+from email.policy import default
+from nturl2path import url2pathname
 from operator import truediv
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
@@ -79,7 +82,7 @@ class UserProfile(models.Model):
     user=models.OneToOneField(Account,on_delete=models.CASCADE)
     address_line_1 = models.CharField(blank=True,max_length=100)
     address_line_2 = models.CharField(blank=True,max_length=100)
-    profile_picture = models.ImageField(blank=True,upload_to='photos/userprofile')
+    profile_picture = models.ImageField(blank=True, default="Profile Pic" ,upload_to='photos/userprofile')
     city = models.CharField(blank=True,max_length=20)
     state = models.CharField(blank=True,max_length=20)
     country = models.CharField(blank=True,max_length=20)

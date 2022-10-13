@@ -57,11 +57,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_session_timeout.middleware.SessionTimeoutMiddleware',
+    # 'django_session_timeout.middleware.SessionTimeoutMiddleware',
 ]
 
-SESSION_EXPIRE_SECONDS = 30  # 1 hour
-SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+# SESSION_EXPIRE_SECONDS = 30  # 1 hour
+# SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 # SESSION_TIMEOUT_REDIRECT = 'accounts/login/'
 
 ROOT_URLCONF = 'ecommercesite.urls'
@@ -153,8 +153,17 @@ MESSAGE_TAGS = {
 #smtp activation
 
 
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT',cast=int)
-EMAIL_HOST_USER =config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD =config('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS =config('EMAIL_USE_TLS',cast=bool)
+# EMAIL_HOST = config('EMAIL_HOST')
+# EMAIL_PORT = config('EMAIL_PORT',cast=int)
+# EMAIL_HOST_USER =config('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD =config('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_TLS =config('EMAIL_USE_TLS',cast=bool)
+
+# SMTP configuration
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'greatkartecommerce@gmail.com'
+EMAIL_HOST_PASSWORD = 'greatkart@123'
+EMAIL_USE_TLS = True
+

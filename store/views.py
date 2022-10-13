@@ -37,25 +37,27 @@ def store(request,category_slug=None):
 
 def product_detail(request,category_slug,product_slug):
     try:
-        single_product =Product.objects.get(category__slug=category_slug,slug=product_slug)
-        in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request),product=single_product)
+        single_product = Product.objects.get(category__slug=category_slug,slug=product_slug)
+        in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request),product=single_product).exists()
     except Exception as e:
         raise e 
-    
     if request.user.is_authenticated:
         try:
             orderproduct=OrderProduct.objects.filter(user=request.user,product_id=single_product.id).exists()
+            print("section 2")
             
         except OrderProduct.DoesNotExist:
+            print("section 3")
             orderproduct=None    
     else:
-        orderproduct=False
+        orderproduct=None
     
     # get the reviews
     reviews=ReviewRating.objects.filter(product_id=single_product.id,status=True)
     
     # get the product gallery
     product_gallery = ProductGallery.objects.filter(product_id=single_product.id)
+    print("section 4")
     
     context={
         'single_product':single_product,
@@ -67,7 +69,7 @@ def product_detail(request,category_slug,product_slug):
     return render(request,'store/product_detail.html',context)
 
 
-def search(request):
+def search(request): 
     if 'keyword' in request.GET:
         keyword = request.GET['keyword']
         if keyword:
@@ -90,13 +92,13 @@ def submit_review(request,product_id):
             messages.success(request,'ThankYou.Your review has been updated.')
             return redirect (url)
         except ReviewRating.DoesNotExist:
-            form=ReviewRating(request.POST)
+            form=ReviewForm(request.POST)
             if form.is_valid():
                 data=ReviewRating()
                 data.subject=form.cleaned_data['subject']
                 data.rating=form.cleaned_data['rating']
                 data.review=form.cleaned_data['review']
-                data.ip=request.META.get['REMOTE_ADDR']
+                data.ip=request.META.get('REMOTE_ADDR')
                 data.product_id=product_id
                 data.user_id=request.user.id
                 data.save()
