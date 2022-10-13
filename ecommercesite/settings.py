@@ -159,11 +159,4 @@ MESSAGE_TAGS = {
 # EMAIL_HOST_PASSWORD =config('EMAIL_HOST_PASSWORD')
 # EMAIL_USE_TLS =config('EMAIL_USE_TLS',cast=bool)
 
-# SMTP configuration
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'greatkartecommerce@gmail.com'
-EMAIL_HOST_PASSWORD = 'greatkart@123'
-EMAIL_USE_TLS = True
 
